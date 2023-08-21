@@ -1,19 +1,39 @@
 package com.example;
 
+import com.example.chainOfResponsibility.*;
 import com.example.mediator.ArticleDialogBox;
 import com.example.observer.Chart;
 import com.example.observer.DataSource;
 import com.example.observer.SpreadSheet;
+import com.example.visitor.*;
 
 public class Main {
 
     public static void main(String[] args) {
 	// write your code here
 
-        var dialog = new ArticleDialogBox();
-         dialog.simulateInteraction();
-        //-------------------------------------------------
-        //Observer method
+        //-------------Visitor pattern ----------------------
+        var document = new HtmlDocument();
+        document.add(new HeadingNode());
+        document.add(new AnchorNode());
+        document.execute(new HighlightOperation());
+        document.execute(new PlainTextOperation());
+
+        //-------chain of responsibility--------------------
+        //auth -> logger -> compressor -> Encrypt
+       /* var encryptor = new Encryptor(null);
+        var compressor = new Compressor(encryptor);
+        var logger = new Logging(compressor);
+        var authenticator  = new Authenticator(logger);
+
+        var server = new WebServer(authenticator);
+        server.handle(new HttpRequest("admin", "1234"));
+        */
+        //----------Mediator-------------------------
+        /*var dialog = new ArticleDialogBox();
+         dialog.simulateInteraction();*/
+
+        //----------------Observer method---------------------------------
         /*var dataSource = new DataSource();
         var sheet1 = new SpreadSheet(dataSource);
         var sheet2 = new SpreadSheet(dataSource);
@@ -25,7 +45,7 @@ public class Main {
 
         dataSource.setValue(1);*/
 
-        //-----------------------------------------------
+        //------------------Command Pattern-----------------------------
         //Command Pattern
         /*var service  = new CustomerService();
         var command = new AddCustomerCommand(service);
@@ -49,12 +69,12 @@ public class Main {
         undoCommand.execute();
         System.out.println(document.getContent());*/
 
-        //------------------------------------
+        //---------------Template method pattern---------------------
         //Template method patter
      /*   var task  = new TransferMoneyTask();
         task.execute();*/
 
-       //---------------------------------------------
+       //----------------Strategy Pattern-----------------------------
         //Strategy Pattern
        /* var imageStorage = new ImageStorage();
         imageStorage.store("q", new JpegCompressor(),
@@ -62,7 +82,7 @@ public class Main {
         imageStorage.store("q", new PngCompressor(),
                 new HighContrastFilter());*/
 
-       //-----------------------------------
+       //---------------Iterator pattern--------------------
         //Iterator pattern
        /* var history = new BrowseHistory();
         history.push("a");
@@ -76,14 +96,14 @@ public class Main {
             iterator.next();
         }
 */
-       //-------------------------------------
+       //--------------State pattern-----------------------
         //State pattern
         /*var canvas  = new Canvas();
         canvas.setCurrentTool(new BrushTool());
         canvas.mouseDown();
         canvas.mouseUp();*/
 
-        //------------------------------------
+        //---------------Momento Pattern---------------------
         //Momento Pattern
        /* var editor = new Editor();
         var history = new History();
