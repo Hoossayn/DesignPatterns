@@ -5,18 +5,55 @@ import com.example.Behavioral.TaxCalculator;
 import com.example.Behavioral.TaxCalculator2019;
 import com.example.Behavioral.UIControl;
 import com.example.Behavioral.visitor.*;
+import com.example.structural.adapter.CaramelFilter;
+import com.example.structural.adapter.Image;
+import com.example.structural.adapter.ImagePreview;
+import com.example.structural.adapter.VividFilter;
+import com.example.structural.adapter.avaFilters.Caramel;
+import com.example.structural.composite.Group;
+import com.example.structural.composite.Shape;
+import com.example.structural.decorator.CloudStream;
+import com.example.structural.decorator.CompressedCloudStream;
+import com.example.structural.decorator.EncryptedCloudStream;
+import com.example.structural.decorator.Stream;
 
 public class Main {
 
     public static void main(String[] args) {
 	// write your code here
 
+
+        //-------------Decorator pattern -------------------
+        storeCreditCard(new EncryptedCloudStream(
+                new CompressedCloudStream(new CloudStream())
+        ));
+
+        //-------------Adapter pattern -------------------
+       /* var imageView = new ImagePreview(new Image());
+        imageView.apply(new CaramelFilter(new Caramel()));*/
+
+        //-------------Composite pattern -------------------
+        /*var group1 = new Group();
+        group1.add(new Shape());
+        group1.add(new Shape());
+
+        var group2 = new Group();
+        group2.add(new Shape());
+        group2.add(new Shape());
+
+        var group = new Group();
+        group.add(group1);
+        group.add(group2);
+        group.render();
+        group.move();
+        group.delete();*/
+
         //-------------Visitor pattern ----------------------
-        var document = new HtmlDocument();
+        /*var document = new HtmlDocument();
         document.add(new HeadingNode());
         document.add(new AnchorNode());
         document.execute(new HighlightOperation());
-        document.execute(new PlainTextOperation());
+        document.execute(new PlainTextOperation());*/
 
         //-------chain of responsibility--------------------
         //auth -> logger -> compressor -> Encrypt
@@ -130,7 +167,11 @@ public class Main {
         calculator.calculateTax();*/
     }
 
-     public static void drawUIControl(UIControl control){
+    private static void storeCreditCard(Stream stream) {
+        stream.write("123-4567-3456-245");
+    }
+
+    public static void drawUIControl(UIControl control){
         control.draw();
      }
 
