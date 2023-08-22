@@ -1,11 +1,10 @@
 package com.example;
 
-import com.example.chainOfResponsibility.*;
-import com.example.mediator.ArticleDialogBox;
-import com.example.observer.Chart;
-import com.example.observer.DataSource;
-import com.example.observer.SpreadSheet;
-import com.example.visitor.*;
+
+import com.example.Behavioral.TaxCalculator;
+import com.example.Behavioral.TaxCalculator2019;
+import com.example.Behavioral.UIControl;
+import com.example.Behavioral.visitor.*;
 
 public class Main {
 
