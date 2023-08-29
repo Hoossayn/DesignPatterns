@@ -5,17 +5,35 @@ import com.example.Behavioral.TaxCalculator;
 import com.example.Behavioral.TaxCalculator2019;
 import com.example.Behavioral.UIControl;
 import com.example.Behavioral.visitor.*;
+import com.example.creational.abstractFactory.ant.AntWidgetFactory;
+import com.example.creational.abstractFactory.app.ContactForm;
+import com.example.creational.builder.MovieBuilder;
+import com.example.creational.builder.PdfDocumentBuilder;
+import com.example.creational.builder.Presentation;
+import com.example.creational.builder.Slide;
+import com.example.creational.factory.ProductController;
+import com.example.creational.singleton.ConfigManager;
 import com.example.structural.adapter.CaramelFilter;
 import com.example.structural.adapter.Image;
 import com.example.structural.adapter.ImagePreview;
 import com.example.structural.adapter.VividFilter;
 import com.example.structural.adapter.avaFilters.Caramel;
+import com.example.structural.bridge.AdvancedRemoteControl;
+import com.example.structural.bridge.LGTv;
+import com.example.structural.bridge.SonyTv;
 import com.example.structural.composite.Group;
 import com.example.structural.composite.Shape;
 import com.example.structural.decorator.CloudStream;
 import com.example.structural.decorator.CompressedCloudStream;
 import com.example.structural.decorator.EncryptedCloudStream;
 import com.example.structural.decorator.Stream;
+import com.example.structural.facade.NotificationService;
+import com.example.structural.flyweight.PointIconFactory;
+import com.example.structural.flyweight.PointService;
+import com.example.structural.proxy.EbookProxy;
+import com.example.structural.proxy.Library;
+import com.example.structural.proxy.LoggingEbookProxy;
+import com.example.structural.proxy.RealEbook;
 
 public class Main {
 
@@ -23,11 +41,53 @@ public class Main {
 	// write your code here
 
 
-        //-------------Decorator pattern -------------------
-        storeCreditCard(new EncryptedCloudStream(
-                new CompressedCloudStream(new CloudStream())
-        ));
+        //-------------Builder pattern -----------------
+        var presentation = new Presentation();
+        presentation.addSlide(new Slide("Slide 1"));
+        presentation.addSlide(new Slide("Slide 2"));
 
+        var builder = new PdfDocumentBuilder();
+        presentation.export(builder);
+        var pdf =  builder.getPdfDocument();
+
+        //-------------Abstract factory pattern -----------------
+        //new ContactForm().render(new AntWidgetFactory());
+
+        //-------------Factory pattern -----------------
+        //new ProductController().listProduct();
+
+        //-------------Singleton pattern -----------------
+        /*ConfigManager manager = ConfigManager.getInstance();
+        manager.set("name","Joe");
+
+        ConfigManager other = ConfigManager.getInstance();
+        System.out.println(other.get("name"));*/
+
+        //-------------Proxy pattern -------------------
+        /*var library = new Library();
+        String[] fileNames = { "a", "b", "c"};
+        for (var fileName: fileNames)
+            library.add(new LoggingEbookProxy(fileName));
+
+        library.openEbook("a");
+        library.openEbook("b");*/
+
+        //-------------Bridge pattern -------------------
+        /*var remoteControl = new AdvancedRemoteControl(new LGTv());
+        remoteControl.turnOff();*/
+
+        //-------------Flyweight pattern -------------------
+        /*var service = new PointService(new PointIconFactory());
+        for (var point: service.getPoints()){
+            point.draw();
+        }*/
+        //-------------Facade pattern -------------------
+        /*var service = new NotificationService();
+        service.send("Hello there!!", "target");*/
+        //-------------Decorator pattern -------------------
+       /* storeCreditCard(new EncryptedCloudStream(
+                new CompressedCloudStream(new CloudStream())
+        ));*/
         //-------------Adapter pattern -------------------
        /* var imageView = new ImagePreview(new Image());
         imageView.apply(new CaramelFilter(new Caramel()));*/
